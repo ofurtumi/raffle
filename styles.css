@@ -131,10 +131,6 @@ button:active {
 	/* margin-bottom: 2em; */
 }
 
-#winner {
-	font-size: 4rem;
-}
-
 .front,
 .back {
 	position: absolute;
@@ -159,9 +155,11 @@ button:active {
 }
 
 #winner {
+	font-size: 4rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 	height: 100%;
 	width: 100%;
 	border: 5px solid var(--casino-3);

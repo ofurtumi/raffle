@@ -1,9 +1,4 @@
-const people = [
-	['Stjarnan', '001'],
-	['Tumi', '004'],
-	['Ari', '007'],
-	['Herbert', '069'],
-];
+let people;
 
 const CW = document.querySelector('#winner'); // * current winner, sigurvegari sem var dreginn
 const cardHolder = document.querySelector('#cardholder');
@@ -26,7 +21,9 @@ function killAndRevive(parent, childArr, kidType = 'p') {
 	});
 }
 
-window.onload = () => {
+window.onload = async () => {
+	let people_json = await fetch("people.json");
+	people = await people_json.json();
 	killAndRevive(
 		rest,
 		people.map((n) => {
