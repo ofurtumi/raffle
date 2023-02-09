@@ -9,8 +9,6 @@ const winners = document.querySelector('#winners'); // * fólk sem er búið að
 const button = document.querySelector('#draw');
 let winArr = [];
 let imgChoice;
-val = 110;
-let counter = 0;
 
 function killAndRevive(parent, childArr, kidType = 'p') {
 	while (parent.hasChildNodes()) {
@@ -41,11 +39,8 @@ function draw() {
 		`url(${imgChoice})`
 	);
 	cardHolder.classList.add('flipped');
-	console.log(counter);
-	console.log(val);
 
-	let randVal = counter++ === 10 ? val : Math.floor(Math.random() * people.length);
-	if (randVal < val) val--;
+	let randVal = Math.floor(Math.random() * people.length);
 
 	winner.textContent = people[randVal][1];
 	cardNumber.forEach((node) => {
