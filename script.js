@@ -10,6 +10,12 @@ const button = document.querySelector('#draw');
 let winArr = [];
 let imgChoice;
 
+/**
+ * 
+ * @param {DomNode} parent 
+ * @param {arr<DomNode>} childArr 
+ * @param {element} kidType - default p 
+ */
 function killAndRevive(parent, childArr, kidType = 'p') {
 	while (parent.hasChildNodes()) {
 		parent.removeChild(parent.firstChild);
