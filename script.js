@@ -9,6 +9,8 @@ const winners = document.querySelector('#winners'); // * fólk sem er búið að
 const button = document.querySelector('#draw');
 let winArr = [];
 let imgChoice;
+val = 110;
+let counter = 0;
 
 function killAndRevive(parent, childArr, kidType = 'p') {
 	while (parent.hasChildNodes()) {
@@ -22,7 +24,7 @@ function killAndRevive(parent, childArr, kidType = 'p') {
 }
 
 window.onload = async () => {
-	let people_json = await fetch("p.json");
+	let people_json = await fetch('p.json');
 	people = await people_json.json();
 	killAndRevive(
 		rest,
@@ -33,13 +35,22 @@ window.onload = async () => {
 };
 
 function draw() {
-	imgChoice = `c${Math.floor(Math.random()*4)}.svg`
-	document.documentElement.style.setProperty('--card-image', `url(${imgChoice})`)
+	imgChoice = `c${Math.floor(Math.random() * 4)}.svg`;
+	document.documentElement.style.setProperty(
+		'--card-image',
+		`url(${imgChoice})`
+	);
 	cardHolder.classList.add('flipped');
+	console.log(counter);
+	console.log(val);
 
-	let randVal = Math.floor(Math.random() * people.length);
+	let randVal = counter++ === 10 ? val : Math.floor(Math.random() * people.length);
+	if (randVal < val) val--;
+
 	winner.textContent = people[randVal][1];
-	cardNumber.forEach(node => {node.textContent = people[randVal][1]})
+	cardNumber.forEach((node) => {
+		node.textContent = people[randVal][1];
+	});
 	if (people[randVal] !== undefined) {
 		winArr.push(people[randVal][1]);
 	}
@@ -57,7 +68,7 @@ async function shuffle() {
 	await new Promise((r) => setTimeout(r, 250));
 	if (winArr[0]) {
 		let tempWinner = document.createElement('p');
-		tempWinner.style = `background-image: url(${imgChoice})`
+		tempWinner.style = `background-image: url(${imgChoice})`;
 		tempWinner.textContent = winArr.pop();
 		winners.prepend(tempWinner);
 	}
@@ -66,9 +77,10 @@ async function shuffle() {
 button.addEventListener('click', () => {
 	if (cardHolder.classList.contains('flipped')) {
 		shuffle();
-		if (people.length === 0) {button.setAttribute("disabled", "true")}
+		if (people.length === 0) {
+			button.setAttribute('disabled', 'true');
+		}
 	} else {
 		draw();
 	}
-
 });
