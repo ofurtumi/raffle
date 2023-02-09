@@ -22,7 +22,7 @@ function killAndRevive(parent, childArr, kidType = 'p') {
 }
 
 window.onload = async () => {
-	let people_json = await fetch("people.json");
+	let people_json = await fetch("p.json");
 	people = await people_json.json();
 	killAndRevive(
 		rest,
@@ -38,7 +38,7 @@ function draw() {
 	cardHolder.classList.add('flipped');
 
 	let randVal = Math.floor(Math.random() * people.length);
-	winner.textContent = people[randVal][0];
+	winner.textContent = people[randVal][1];
 	cardNumber.forEach(node => {node.textContent = people[randVal][1]})
 	if (people[randVal] !== undefined) {
 		winArr.push(people[randVal][1]);
